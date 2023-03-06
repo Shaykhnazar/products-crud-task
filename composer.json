@@ -1,0 +1,27 @@
+{
+    "name": "shaykhnazar/products-crud-task",
+    "description": "Products CRUD",
+    "authors": [
+        {
+            "name": "Shaykhnazar",
+            "email": "shayx3470941@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/yaml": "^5.1",
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "@stable",
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "3.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
