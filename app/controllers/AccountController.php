@@ -29,7 +29,7 @@ class AccountController extends Controller
                 $password = trim($_POST['password']);
 
                 if(filter_var($login)) {
-                    $sql = "select `id`, `password` from users where login = :login ";
+                    $sql = "select `password` from users where login = :login ";
                     $handle = $this->model->db->query($sql, ['login' => $login]);
 
                     if($handle->rowCount() > 0) {
@@ -37,9 +37,9 @@ class AccountController extends Controller
 //                        var_dump($getRow);
                         if(password_verify($password, $getRow['password'])) {
                             unset($getRow['password']);
-//                            $_SESSION['admin'] = $getRow['id'];
-                            $_SESSION = $getRow;
-                            $this->view->location('/product/index');
+//                            $_SESSION['admin'] = $login;
+//                            $_SESSION = $getRow;
+                            $this->view->location('/products/index');
                         }
                         else {
                             $errors[] = "Wrong Password";
@@ -59,9 +59,9 @@ class AccountController extends Controller
             }
             // Response
             if ($errors) {
-                $this->view->message(false, implode(",", $errors));
+                $this->responseError($errors);
             } else {
-                $this->view->message(true, 'Login successfully!');
+                $this->responseSuccess('Login successfully!');
             }
         }
     }

@@ -16,29 +16,34 @@ return [
         'action' => 'signin',
     ],
 
-    'product/index' => [
+    'products/index' => [
         'controller' => 'product',
         'action' => 'index',
     ],
 
-    'product/store' => [
+    'products/store' => [
         'controller' => 'product',
         'action' => 'store',
     ],
 
-    'product/update' => [
+    'products/update' => [
         'controller' => 'product',
         'action' => 'update',
     ],
 
-    'product/delete' => [
+    'products/delete' => [
         'controller' => 'product',
         'action' => 'delete',
     ],
 
     'sku/generate' => [
-        'controller' => 'sku_settings',
+        'controller' => 'sku_setting',
         'action' => 'generate',
+    ],
+
+    'sku/update' => [
+        'controller' => 'sku_setting',
+        'action' => 'update',
     ],
 
 

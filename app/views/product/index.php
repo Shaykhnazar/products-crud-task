@@ -2,7 +2,7 @@
     <div class="column content-center">
         <div class="product_add_form">
             <h3 style="margin-left: 20%;">Tovar qo'shish</h3>
-            <form action="" name="form">
+            <form action="" id="product_add_form">
                 <div class="product-form-group">
                     <input type="text" placeholder="Tovar nomi" name="name" class="u-input-4 product_add_input" required="">
                 </div>
@@ -19,7 +19,7 @@
     <div class="column">
         <div class="sku_form">
             <h3 style="margin-left: 40%;">Sozlamalar</h3>
-            <form action="" name="form">
+            <form action="/sku/update" method="POST" id="sku_form">
                 <div class="u-form-horizontal">
                     <div class="sku_form_group">
                         <label for="prefix" class="u-label">Prefiks</label>
@@ -27,15 +27,15 @@
                     </div>
                     <div class="sku_form_group">
                         <label for="start_value" class="u-label">Boshlash qiymati</label>
-                        <input type="text" placeholder="10000" id="start_value" name="start_value" class="u-input-2 sku_input" required="required">
+                        <input type="text" placeholder="10000" id="start_value" name="index" class="u-input-2 sku_input" required="required">
                     </div>
                     <div class="sku_form_group">
                         <label for="suffiks" class="u-label">Suffiks</label>
-                        <input type="text" placeholder="-D" id="suffiks" name="suffiks" class="u-input-3 sku_input">
+                        <input type="text" placeholder="-D" id="suffiks" name="suffix" class="u-input-3 sku_input">
                     </div>
                 </div>
                 <div class="u-row">
-                    <a href="#" class="sku_save_btn content-center">Saqlash</a>
+                    <input type="submit" value="Saqlash" class="sku_save_btn content-center" />
                 </div>
             </form>
         </div>

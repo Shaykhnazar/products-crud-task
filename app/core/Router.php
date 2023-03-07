@@ -56,8 +56,7 @@ class Router
     public function run(): void
     {
         if($this->match()){
-            $controllerClass = 'app\controllers\\'.ucfirst($this->params['controller']).'Controller';
-            //echo $controllerClass;
+            $controllerClass = 'app\controllers\\'.snakeToCamelWords($this->params['controller']).'Controller';
             if(class_exists($controllerClass)) {
                 $action = $this->params['action'].'Action';
                 if (method_exists($controllerClass, $action)){

@@ -26,7 +26,7 @@
                     <input type="password" name="password" class="login_input" placeholder="Password" id="my-password" required />
                 </div>
                 <div class="form-group">
-                    <input name="submit" type="submit" value="Login" class="btn btn-success" />
+                    <input name="submit" type="submit" value="Login" class="btn btn-success login_input_submit" />
                 </div>
             </div>
         </form>

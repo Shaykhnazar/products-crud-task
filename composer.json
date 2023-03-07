@@ -20,7 +20,10 @@
     "autoload": {
         "psr-4": {
             "app\\": "app"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "minimum-stability": "stable",
     "prefer-stable": true

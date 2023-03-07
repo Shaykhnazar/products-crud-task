@@ -22,11 +22,11 @@ abstract class Controller
 
     /**
      * @param $name
-     * @return mixed
+     * @return Model
      */
-    public function loadModel($name)
+    public function loadModel($name): Model
     {
-        $path = 'app\models\\'.ucfirst($name);
+        $path = 'app\models\\'.snakeToCamelWords($name);
         if (class_exists($path)) {
             return new $path;
         }
@@ -63,6 +63,25 @@ abstract class Controller
     {
         return in_array($this->route['action'], $this->acl[$key]);
     }
-    
+
+    /**
+     * @param array $errors
+     * @return void
+     */
+    public function responseError(array $errors=[]): void
+    {
+        if ($errors) {
+            $this->view->message(false, implode(",", $errors));
+        }
+    }
+
+    /**
+     * @param $message
+     * @return void
+     */
+    public function responseSuccess($message): void
+    {
+        $this->view->message(true, $message);
+    }
 
 }
