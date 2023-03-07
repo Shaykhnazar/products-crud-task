@@ -7,7 +7,7 @@
                     <input type="text" placeholder="Tovar nomi" name="name" class="u-input-4 product_add_input" required="">
                 </div>
                 <div class="product-form-group" style="width: 100%; display: flex; flex: content-box">
-                    <input type="text" placeholder="SKU" name="sku" class="u-input-5 product_add_input" required="required" style="width: 60%">
+                    <input type="text" placeholder="SKU" name="sku" class="u-input-5 product_add_input" required="required" style="width: 70%">
                     <button class="sku_generate_btn">Generatsiya</button>
                 </div>
                 <div>
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="column">
-        <div class="sku_form" style="margin-right: inherit">
+        <div class="sku_form">
             <h3 style="margin-left: 40%;">Sozlamalar</h3>
             <form action="" name="form">
                 <div class="u-form-horizontal">
