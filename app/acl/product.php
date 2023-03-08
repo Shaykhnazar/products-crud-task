@@ -6,6 +6,7 @@ return [
         'store',
         'update',
         'delete',
+        'getlist',
     ],
 
     'authorize'=>[

@@ -1,6 +1,7 @@
 <?php
 namespace app\lib;
 use PDO;
+use PDOStatement;
 
 class Db 
 {
@@ -15,14 +16,21 @@ class Db
     /**
      * @param $sql
      * @param array $params
-     * @return false|\PDOStatement
+     * @param array $paramTypes
+     * @return bool|PDOStatement
      */
-    public function query($sql, array $params = []): bool|\PDOStatement
+    public function query($sql, array $params = [], array $paramTypes = []): bool|PDOStatement
     {
         $stmt = $this->db->prepare($sql);
         if(!empty($params)){
-            foreach ($params as $key => $val) {
-                 $stmt->bindValue(':'.$key, $val);
+            if (!empty($paramTypes)) {
+                foreach ($params as $key => $val) {
+                    $stmt->bindValue(':'.$key, $val, $paramTypes[$key]);
+                }
+            } else {
+                foreach ($params as $key => $val) {
+                    $stmt->bindValue(':'.$key, $val);
+                }
             }
         }
         $stmt->execute();
@@ -33,22 +41,36 @@ class Db
     /**
      * @param $sql
      * @param array $params
+     * @param array $paramTypes
      * @return array
      */
-    public function row($sql, array $params = []): array
+    public function row($sql, array $params = [], array $paramTypes = []): array
     {
-        $result = $this->query($sql, $params);
+        $result = $this->query($sql, $params, $paramTypes);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
      * @param $sql
      * @param array $params
+     * @param array $paramTypes
      * @return mixed
      */
-    public function column($sql, array $params = []): mixed
+    public function column($sql, array $params = [], array $paramTypes = []): mixed
     {
-        $result = $this->query($sql, $params);
+        $result = $this->query($sql, $params, $paramTypes);
         return $result->fetchColumn();
+    }
+
+    /**
+     * @param $sql
+     * @param array $params
+     * @param array $paramTypes
+     * @return bool|array
+     */
+    public function fetch($sql, array $params = [], array $paramTypes = []): bool|array
+    {
+        $result = $this->query($sql, $params, $paramTypes);
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 }

@@ -9,6 +9,7 @@
     <link href="../../../public/styles/products.css" rel="stylesheet">
     <script src="../../../public/scripts/jquery.js" defer></script>
     <script src="../../../public/scripts/form.js" defer></script>
+    <script src="../../../public/scripts/products.js" defer></script>
  </head>
 <body>
     <?php require_once "header.php";?>

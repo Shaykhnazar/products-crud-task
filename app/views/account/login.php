@@ -15,7 +15,7 @@
             echo '<div class="alert alert-success" role="alert">'.$success.'</div>';
         }
         ?>
-        <form action="/account/signin" method="post" id="login_form">
+        <form action="/api/account/signin" method="post" id="login_form">
             <div>
                 <div class="form-group">
                     <label for="my-name">Login</label>

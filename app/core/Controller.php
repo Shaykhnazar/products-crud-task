@@ -84,4 +84,34 @@ abstract class Controller
         $this->view->message(true, $message);
     }
 
+    /**
+     * @param $message
+     * @return void
+     */
+    public function responseErrorMessage($message): void
+    {
+        $this->view->message(false, $message);
+    }
+
+    /**
+     * @param $data
+     * @param int $flags
+     */
+    public function responseJson($data, int $flags = 0)
+    {
+        exit(json_encode($data, $flags));
+    }
+
+    /**
+     * @param $data
+     * @param int $flags
+     * @param string $message
+     */
+    public function responseJsonAsData($data, string $message = '', int $flags = 0): void
+    {
+        $this->responseJson([
+            'data' => $data,
+            'message' => $message
+        ], $flags);
+    }
 }

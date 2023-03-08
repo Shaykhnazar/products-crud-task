@@ -11,7 +11,7 @@ return [
         'action' => 'login',
     ],
 
-    'account/signin' => [
+    'api/account/signin' => [
         'controller' => 'account',
         'action' => 'signin',
     ],
@@ -21,27 +21,32 @@ return [
         'action' => 'index',
     ],
 
-    'products/store' => [
+    'api/products/getlist' => [
+        'controller' => 'product',
+        'action' => 'getlist',
+    ],
+
+    'api/products/store' => [
         'controller' => 'product',
         'action' => 'store',
     ],
 
-    'products/update' => [
+    'api/products/update' => [
         'controller' => 'product',
         'action' => 'update',
     ],
 
-    'products/delete' => [
+    'api/products/delete' => [
         'controller' => 'product',
         'action' => 'delete',
     ],
 
-    'sku/generate' => [
+    'api/sku/generate' => [
         'controller' => 'sku_setting',
         'action' => 'generate',
     ],
 
-    'sku/update' => [
+    'api/sku/update' => [
         'controller' => 'sku_setting',
         'action' => 'update',
     ],

@@ -24,12 +24,12 @@ class View
     {
         extract($vars);
         $path = 'app/views/'.$this->path.'.php';
-        if(file_exists($path)){
+        if(file_exists($path)) {
             ob_start();
             require $path;
             $content = ob_get_clean();
             require 'app/views/layouts/'.$this->layout.'.php';
-        }else {
+        } else {
             echo 'Вид не найден '.$this->path;
         }
     }

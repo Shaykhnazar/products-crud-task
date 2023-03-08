@@ -29,7 +29,7 @@
     /*width: 100px;*/
 }
 
-.product-form-group {
+.product_form_group {
     width: 100%;
     display: flex;
     flex: content-box
@@ -223,7 +223,7 @@
     justify-content: center;
 }
 
-.u-table-1 {
+.products-table {
     width: 100%;
 }
 
@@ -298,3 +298,32 @@
      line-height: 1.5;
 }
 
+.u-pagination-icon-img {
+    width: 10px;
+}
+
+/* Pagination*/
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}

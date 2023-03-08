@@ -12,7 +12,7 @@ class Router
     public function __construct()
     {
         $arr = require 'app/config/routes.php';
-        foreach ($arr as $key=> $val){
+        foreach ($arr as $key=> $val) {
             $this->add($key, $val);
         }
     }
@@ -37,9 +37,12 @@ class Router
     public function match(): bool
     {
         $url = trim($_SERVER['REQUEST_URI'],'/');
-        foreach ($this->routes as $route => $params)
-        {
-            if(preg_match($route, $url,$matches)){
+        if (str_starts_with($url, 'api')) {
+            // Url without QueryString params
+            $url = explode('?', $url, 2)[0];
+        }
+        foreach ($this->routes as $route => $params) {
+            if(preg_match($route, $url,$matches)) {
                 $this->params = $params;
                 return true;
             }
@@ -55,20 +58,20 @@ class Router
      */
     public function run(): void
     {
-        if($this->match()){
+        if($this->match()) {
             $controllerClass = 'app\controllers\\'.snakeToCamelWords($this->params['controller']).'Controller';
             if(class_exists($controllerClass)) {
                 $action = $this->params['action'].'Action';
-                if (method_exists($controllerClass, $action)){
+                if (method_exists($controllerClass, $action)) {
                     $controller = new $controllerClass($this->params);
                     $controller->$action();
-                }else{
+                } else {
                     View::errors(404);
                 }
-            }else{
+            } else {
                 View::errors(404);
             }
-        }else{
+        } else {
             View::errors(403);
         }
     }

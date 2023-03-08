@@ -11,7 +11,19 @@ class SkuSettingController extends Controller
      */
     public function GenerateAction()
     {
-        //
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+
+        // If sku_settings is empty, message to user about it
+        $count = $this->model->getCount()['count'];
+        if ($count == 0) $this->responseErrorMessage('Oldin sozlamani sozlang! Keyin mahsulot qo\'sha olasiz');
+
+        $generatedSku = $this->model->generate();
+        if (!is_null($generatedSku))
+            $this->responseJsonAsData($generatedSku);
+        else {
+            $this->responseErrorMessage('Generatsiya qilishda xatolik yuz berdi.');
+        }
     }
 
 
