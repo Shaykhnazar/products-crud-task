@@ -1,5 +1,5 @@
 <?php
-
+// Need configuration for acl every time when you add/remove/change these route urls!
 return [
     '' => [
         'controller' => 'main',
@@ -24,6 +24,11 @@ return [
     'api/products/getlist' => [
         'controller' => 'product',
         'action' => 'getlist',
+    ],
+
+    'api/products/getone' => [
+        'controller' => 'product',
+        'action' => 'getone',
     ],
 
     'api/products/store' => [

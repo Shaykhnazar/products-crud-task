@@ -2,13 +2,13 @@
     <div class="column content-center">
         <div class="product_add_form">
             <h3 style="margin-left: 20%;">Tovar qo'shish</h3>
-            <form action="/api/products/store" method="POST" id="product_add_form">
+            <form action="/api/products/store" method="POST" id="product_add_form" data-form="add">
                 <div class="product_form_group">
                     <input type="text" placeholder="Tovar nomi" name="name" class="u-input-4 product_add_input" required="">
                 </div>
                 <div class="product_form_group" style="width: 100%; display: flex; flex: content-box">
-                    <input type="text" placeholder="SKU" name="sku" class="u-input-5 product_add_input" required="required" style="width: 70%" id="generatedSkuInput">
-                    <button class="sku_generate_btn" id="sku_generate_btn">Generatsiya</button>
+                    <input type="text" placeholder="SKU" name="sku" class="u-input-5 product_add_input" required="required" style="width: 70%" data-form="add">
+                    <button class="sku_generate_btn">Generatsiya</button>
                 </div>
                 <div>
                     <input type="submit" value="Saqlash" class="u-btn content-center"/>
@@ -62,4 +62,41 @@
     </table>
     <div id="pagination" class="pagination">
     </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close_model_span">&times;</span>
+            <h2>Tovarni tahrirlash</h2>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="column content-center">
+                    <div class="product_add_form">
+                        <form action="/api/products/update" method="POST" id="product_edit_form" data-form="edit">
+                            <div class="product_form_group">
+                                <input type="text" placeholder="Tovar nomi" name="name" class="u-input-4 product_add_input" required="">
+                            </div>
+                            <div class="product_form_group" style="width: 100%; display: flex; flex: content-box">
+                                <input type="text" placeholder="SKU" name="sku" class="u-input-5 product_add_input" required="required" style="width: 70%" data-form="edit">
+                                <button class="sku_generate_btn">Generatsiya</button>
+                            </div>
+                            <input type="hidden" name="id" value="">
+                            <div>
+                                <input type="submit" value="Saqlash" class="u-btn content-center"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="modal-footer">-->
+<!--            <h3>Modal Footer</h3>-->
+<!--        </div>-->
+    </div>
+
 </div>

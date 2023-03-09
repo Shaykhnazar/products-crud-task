@@ -7,6 +7,7 @@ return [
         'update',
         'delete',
         'getlist',
+        'getone',
     ],
 
     'authorize'=>[

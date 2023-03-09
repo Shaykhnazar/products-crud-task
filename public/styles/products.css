@@ -327,3 +327,8 @@
     background-color: #ddd;
     border-radius: 5px;
 }
+
+button.u-icon {
+    background-color: transparent;
+    border: none;
+}

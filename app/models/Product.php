@@ -44,9 +44,26 @@ class Product extends Model
      */
     public function store($name, $sku): bool|PDOStatement
     {
-        return $this->db->fetch("INSERT INTO `products` (`name`, `sku`) VALUES (:name, :sku); SELECT LAST_INSERT_ID();", [
+        return $this->db->fetch("INSERT INTO `products` (`name`, `sku`) VALUES (:name, :sku);", [
             'name' => $name,
             'sku' => $sku,
+        ]);
+    }
+
+    /**
+     * Update product
+     *
+     * @param $name
+     * @param $sku
+     * @param int $id
+     * @return bool|PDOStatement
+     */
+    public function update($name, $sku, int $id): bool|PDOStatement
+    {
+        return $this->db->fetch("UPDATE `products` SET name=:name, sku=:sku WHERE id =:id;", [
+            'name' => $name,
+            'sku' => $sku,
+            'id' => $id,
         ]);
     }
 
@@ -73,18 +90,47 @@ class Product extends Model
 
     /**
      * Check duplicate for columns name, sku
-     *
+     * If id exists then exclude this id while checking
      * @param $name
      * @param $sku
+     * @param int|null $id
      * @return array|bool
      */
-    public function checkDuplicate($name, $sku): array|bool
+    public function checkDuplicate($name, $sku, int $id = null): array|bool
     {
-        return $this->db->fetch("SELECT * FROM products WHERE name = :name OR sku = :sku;", [
+//        if ($id) {
+//            return $this->db->fetch("SELECT * FROM products WHERE (name = :name OR sku = :sku) AND id!=:id;", [
+//                'name' => $name,
+//                'sku' => $sku,
+//                'id' => $id,
+//            ]);
+//        }
+//        return $this->db->fetch("SELECT * FROM products WHERE name = :name OR sku = :sku;", [
+//            'name' => $name,
+//            'sku' => $sku,
+//        ]);
+        return $this->db->fetch("SELECT * FROM products WHERE (name = :name OR sku = :sku) AND IFNULL(id, 0) <> IFNULL(:id, 0);", [
             'name' => $name,
             'sku' => $sku,
+            'id' => $id,
         ]);
     }
+
+
+//    /**
+//     * Check before creating product sku exists on DB
+//     *
+//     * @param $sku
+//     * @return array|bool
+//     */
+//    public function checkSkuExists($sku): array|bool
+//    {
+//        return $this->db->fetch("
+//            SELECT * FROM sku_settings s WHERE CONCAT(s.prefix, s.index, s.suffix) = :sku
+//        ", [
+//            'sku' => $sku,
+//        ]);
+//    }
 
 
 }

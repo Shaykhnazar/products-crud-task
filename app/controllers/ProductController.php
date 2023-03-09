@@ -3,8 +3,6 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\lib\Db;
-use app\models\Product;
 
 class ProductController extends Controller
 {
@@ -65,34 +63,102 @@ class ProductController extends Controller
 
     }
 
+
     /**
-     * Action to store new product
-     * get data from create view form
+     *
      */
-    public function StoreAction()
+    public function getoneAction()
     {
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
-        header("Access-Control-Allow-Methods: POST");
-        header("Access-Control-Max-Age: 3600");
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-        $name = $_POST['name'] ?? null;
-        $sku = $_POST['sku'] ?? null;
+        // Parse the query string
+        $params = [];
+        parse_str($_SERVER['QUERY_STRING'], $params);
+
+        // Retrieve the product id from the query string, default to null
+        $id = isset($params['id']) ? intval($params['id']) : null;
+
+        if ($id) {
+            // Retrieve the product
+            $product = $this->model->getById($id);
+
+            http_response_code(200);
+            $this->responseJsonAsData($product);
+        } else {
+            http_response_code(404);
+            $this->responseJsonAsData([], "Tovar topilmadi", JSON_UNESCAPED_UNICODE);
+        }
+
+    }
+
+    /**
+     * Action to store new product
+     * get data from create form
+     */
+    public function StoreAction()
+    {
+        header("Access-Control-Allow-Methods: POST");
+        $this->extractedUpdateInsert($name, $sku);
 
         if (!$name && !$sku) {
             $this->responseErrorMessage("Tovar nomi va SKU to'ldirilishi shart!");
         } else if ($this->model->checkDuplicate($name, $sku) !== false) {
             $this->responseErrorMessage("Bunday Tovar nomi yoki SKU allaqachon mavjud!");
         }
+//        if ($this->model->checkSkuExists($sku) === false) {
+//            $this->responseErrorMessage("Bunday SKU bazada mavjud emas!");
+//        }
 
         // Insert the new product into the database
-        $this->model->store($_POST['name'], $_POST['sku']);
+        $this->model->store($name, $sku);
 
         // Retrieve the newly inserted product
         $product = $this->model->getLastInsertedProduct();
 
         http_response_code(201);
         $this->responseJsonAsData($product, "Tovar qo'shildi!");
+    }
+
+    /**
+     * Action to store new product
+     * get data from edit form
+     */
+    public function UpdateAction()
+    {
+        header("Access-Control-Allow-Methods: POST");
+        $this->extractedUpdateInsert($name, $sku);
+
+        $id = $_POST['id'] ?? null;
+        if (!$name && !$sku && !$id) {
+            $this->responseErrorMessage("Tovar nomi va SKU to'ldirilishi shart!");
+        } else if ($this->model->checkDuplicate($name, $sku, $id) !== false) {
+            $this->responseErrorMessage("Bunday Tovar nomi yoki SKU allaqachon mavjud!");
+        }
+
+        // Update
+        $this->model->update($name, $sku, $id);
+
+        // Retrieve the new updated product
+        $product = $this->model->getById($id);
+
+        http_response_code(200);
+        $this->responseJsonAsData($product, "Tovar yangilandi!");
+    }
+
+    /**
+     * @param $name
+     * @param $sku
+     * @return void
+     */
+    protected function extractedUpdateInsert(&$name, &$sku): void
+    {
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        header("Access-Control-Max-Age: 3600");
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
+        $name = $_POST['name'] ?? null;
+        $sku = $_POST['sku'] ?? null;
     }
 }
