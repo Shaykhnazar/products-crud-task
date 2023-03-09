@@ -78,6 +78,18 @@ class Product extends Model
         return $this->db->fetch("SELECT * FROM products WHERE id = :id", ['id' => $id]);
     }
 
+
+    /**
+     * Delete product by ID
+     *
+     * @param int $id
+     * @return bool|PDOStatement
+     */
+    public function delete(int $id): bool|PDOStatement
+    {
+        return $this->db->query("DELETE FROM products WHERE id = :id", ['id' => $id]);
+    }
+
     /**
      * Get last inserted product
      *

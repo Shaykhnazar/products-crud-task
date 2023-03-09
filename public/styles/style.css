@@ -299,3 +299,44 @@ main {
     background-color: #5cb85c;
     color: white;
 }
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+    float: left;
+    width: 50%;
+    margin: 10%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+    background-color: #ccc;
+    color: black;
+}
+/* Add a color to the cancel button */
+.cancelbtn:hover {
+    background-color: #a99999;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+    background-color: #f44336;
+}
+
+/* Add a color to the delete button */
+.deletebtn:hover {
+    background-color: #951107;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .deletebtn {
+        width: 100%;
+    }
+}

@@ -121,7 +121,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Action to store new product
+     * Action to update product
      * get data from edit form
      */
     public function UpdateAction()
@@ -144,6 +144,28 @@ class ProductController extends Controller
 
         http_response_code(200);
         $this->responseJsonAsData($product, "Tovar yangilandi!");
+    }
+
+
+    /**
+     * Action to delete product
+     */
+    public function deleteAction()
+    {
+        header("Access-Control-Allow-Methods: POST");
+
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
+            $this->responseErrorMessage("Tovar id`sida xatolik!");
+        }
+
+        if ($this->model->delete($id)) {
+            http_response_code(200);
+            $this->responseJsonAsData(true, "Tovar o'chirildi!");
+        }
+
+        http_response_code(503);
+        $this->responseErrorMessage("Tovar o'chirishda xatolik!");
     }
 
     /**

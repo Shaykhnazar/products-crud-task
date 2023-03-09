@@ -167,7 +167,7 @@ $(document).ready(function() {
         // console.log(response)
         if (response.data) {
           loadProducts(window.currentProductsPage)
-          closeEditModal()
+          closeModalById("editModal")
         }
         if (response.message) {
           alert(response.message);
@@ -177,13 +177,22 @@ $(document).ready(function() {
   });
 
   // Delete product
+  function deleteProduct(id, callback) {
+    $.ajax({
+      url: '/api/products/delete',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        id: id,
+      },
+      success: function(response) {
+        callback(response);
+      }
+    });
+  }
 
 
-
-
-
-
-  // Edit Modal
+  /********************* Edit Modal ********************************************************/
   const modal = document.getElementById("editModal")
 
   // When the user clicks the button, open the modal
@@ -218,8 +227,54 @@ $(document).ready(function() {
     }
   }
 
-  function closeEditModal() {
-    const modal = document.getElementById("editModal")
+  /********************* Delete Modal ******************************************************/
+  const deleteModal = document.getElementById("deleteModal")
+
+  // When the user clicks the button, open the modal
+  $(document).on("click", ".product_delete_btn", function(event) {
+    event.preventDefault();
+    let productId = this.getAttribute("data-id");
+    // Set product id to data attribute
+    const deleteBtn = document.querySelector(`button[class="deletebtn"]`);
+    deleteBtn.setAttribute('data-product-id', productId)
+
+    deleteModal.style.display = "block";
+  });
+
+
+  $(document).on("click", ".deletebtn", function(event) {
+    event.preventDefault();
+    let productId = this.getAttribute("data-product-id");
+    deleteProduct(productId, function(response) {
+      if (response.data === true) {
+        loadProducts(window.currentProductsPage)
+        closeModalById('deleteModal')
+        alert(response.message)
+      } else {
+        alert(response.message)
+      }
+    });
+  });
+
+  $(document).on("click", ".cancelbtn", function(event) {
+    event.preventDefault();
+    closeModalById('deleteModal')
+  });
+
+  // When the user clicks on <span> (x), close the modal
+  $(document).on("click", ".close_model_span", function() {
+    deleteModal.style.display = "none";
+  })
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      deleteModal.style.display = "none";
+    }
+  }
+
+  function closeModalById(modalId) {
+    let modal = document.getElementById(modalId)
     modal.style.display = "none";
   }
 });

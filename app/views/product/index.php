@@ -94,9 +94,26 @@
                 </div>
             </div>
         </div>
-<!--        <div class="modal-footer">-->
-<!--            <h3>Modal Footer</h3>-->
-<!--        </div>-->
     </div>
+</div>
 
+<!-- Delete Modal -->
+<div id="deleteModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header" style="background-color: red;">
+            <span class="close_model_span">&times;</span>
+            <h2 class="u-text-1">Tovarni  oʻchirib tashlamoqchimisiz?</h2>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="column content-center">
+                    <div class="clearfix">
+                        <button type="button" class="cancelbtn">Yo'q</button>
+                        <button type="button" class="deletebtn">Ha</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
