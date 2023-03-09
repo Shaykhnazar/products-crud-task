@@ -1,11 +1,22 @@
-### Installation steps
+# Installation steps
+
+### Clone this repo
+* `git clone https://github.com/Shaykhnazar/products-crud-task.git`
+* `cp .env.example .env`
+
+#### After that run docker compose
+* `cd docker`
+* `cp .env.example .env`
+#### Set properly variables to .env file
+* `docker-compose up -d`
+###### Get access to volumes while creating containers!!!
+
+
+### Setup database
+#### Import database from `dump.sql` file
+
+#### Default database credentials to access products page:
 ```
-# Clone this repo
-
-# After that run docker compose
-cd docker
-cp .env.example .env
-docker-compose up -d
-# Get access to volumes while creating containers
-
+login: admin
+password: secret
 ```
