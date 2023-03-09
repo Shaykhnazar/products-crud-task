@@ -22,14 +22,15 @@ abstract class Controller
 
     /**
      * @param $name
-     * @return Model
+     * @return Model|null
      */
-    public function loadModel($name): Model
+    public function loadModel($name): ?Model
     {
         $path = 'app\models\\'.snakeToCamelWords($name);
         if (class_exists($path)) {
             return new $path;
         }
+        return null;
     }
 
 
