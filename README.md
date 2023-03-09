@@ -20,3 +20,5 @@
 login: admin
 password: secret
 ```
+
+### [Open project after setup on browser](http://127.0.0.1:8000)
