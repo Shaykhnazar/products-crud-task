@@ -13,7 +13,7 @@
 
 
 ### Setup database
-#### Import database from `dump.sql` file
+#### Import database from `dump.sql` [file](https://github.com/Shaykhnazar/products-crud-task/blob/main/dump.sql)
 
 #### Default database credentials to access products page:
 ```
